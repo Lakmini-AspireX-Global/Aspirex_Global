@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inheriting the purchase order form view -->
+    <record id="purchase_order_form_inherit_item" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.item</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Adding the 'item' field before the 'product_id' field -->
+            <xpath expr="//page[@name='products']//field[@name='product_id' and @widget='product_label_section_and_note_field']" position="before">
+                <field name="item"/>
+            </xpath>
+
+            <!-- Renaming expected arrival -->
+            <xpath expr="//page[@name='products']//list//field[@name='date_planned']" position="attributes">
+                <attribute name="string">Requested delivery date</attribute>
+                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+
+            <xpath expr="//page[@name='products']//list//field[@name='date_planned']" position="after">
+                    <field name="confirm_date"/>
+            </xpath>
+
+
+            <xpath expr="//page[@name='products']//field[@name='product_id' and @widget='product_label_section_and_note_field']" position="after">
+                <field name="vendor_part_number"/>
+                <field name="vendor_part_name"/>
+                <field name="manufacturer_part_number" readonly="state in ('purchase', 'done')"/>
+                <field name="manufacturer_id"  readonly="state in ('purchase', 'done')"/>
+
+
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="manufacturer_part_number_list_view" model="ir.ui.view">
+        <field name="name">manufacturer.part.number.list</field>
+        <field name="model">manufacturer.part.number</field>
+        <field name="arch" type="xml">
+            <list string="manufacturer" editable="top" create="1" multi_edit="1" open_form_view="True">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="manufacturer_part_number_action" model="ir.actions.act_window">
+        <field name="name">Manufacturer </field>
+        <field name="res_model">manufacturer.part.number</field>
+        <field name="view_mode">list</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="manufacturer_part_number_list_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manufacturer Part Number
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_manufacturer.part.number" name='Manufacturer Part Number' sequence="16" parent="purchase.menu_purchase_config"
+              action="manufacturer_part_number_action" groups="base.group_system" >
+    </menuitem>
+</odoo>

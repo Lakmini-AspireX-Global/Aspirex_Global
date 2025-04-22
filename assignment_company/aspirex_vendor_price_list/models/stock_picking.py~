@@ -1,0 +1,37 @@
+from datetime import datetime, time
+from dateutil.relativedelta import relativedelta
+from pytz import UTC
+
+from odoo import api, fields, models, _
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT, get_lang
+from odoo.tools.float_utils import float_compare, float_round
+from odoo.exceptions import UserError
+
+
+class StockPicking(models.Model):
+    _inherit = 'stock.picking'
+
+    item = fields.Integer(string='Item No', readonly=True)
+    manufacturer_id = fields.Many2one(comodel_name='manufacturer.manufacturer', string='Manufacturer',
+                                      help='Manufacturer of the product')
+    manufacturer_part_number = fields.Many2one(comodel_name='manufacturer.part.number',
+                                               string='Manufacturer Part Number',
+                                               help='Part number provided by the manufacturer')
+    vendor_part_number = fields.Char(string='Vendor Part Number', help='Vendor Part Number')
+    vendor_part_name = fields.Char(string='Vendor Part Name', help='Vendor Part Name')
+
+    @api.model_create_multi  # multiple records
+    def create(self, value_list):  # value_list -> fields values
+        for vals in value_list:
+            res = super(StockPicking, self).create(value_list)
+            order_line = self.env['purchase.order'].search([('name', '=', res.origin)]).order_line
+            for line in order_line:
+                line.write({
+                    'manufacturer_id': res.manufacturer_id.id,
+                    'manufacturer_part_number': res.manufacturer_part_number.id,
+                    'vendor_part_number': res.product_code,
+                    'vendor_part_name': res.product_name
+                })
+            test = 1
+            return res
+

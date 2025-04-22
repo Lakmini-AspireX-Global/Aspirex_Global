@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- form view -->
+    <record id="product_supplierinfo_form_inherit" model="ir.ui.view">
+        <field name="name">aspirex_vendor_price_list_inherit_product.supplierinfo.form</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+        <field name="arch" type="xml">
+
+            <!--  adding additional fields -->
+            <xpath expr="//field[@name='product_code']" position="after">
+                <field name="manufacturer_id" />
+                <field name="manufacturer_part_number" />
+            </xpath>
+
+            <!-- renaming vendor part name -->
+            <xpath expr="//field[@name='product_name']" position="attributes">
+            <attribute name="string">Vendor Part Name</attribute>
+            </xpath>
+
+            <!-- renaming vendor part number -->
+            <xpath expr="//field[@name='product_code']" position="attributes">
+            <attribute name="string">Vendor Part Number</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- list view -->
+   <record id="product_supplierinfo_tree_view_inherit" model="ir.ui.view">
+    <field name="name">aspirex_vendor_price_list_inherit_product.supplierinfo.list.view</field>
+    <field name="model">product.supplierinfo</field>
+    <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='delay']" position="after">
+            <field name="manufacturer_id" optional="hide"/>
+            <field name="manufacturer_part_number" optional="hide"/>
+        </xpath>
+
+        <!-- adding vendor part name -->
+            <xpath expr="//field[@name='product_name']" position="attributes">
+            <attribute name="string">Vendor Part Name</attribute>
+            </xpath>
+
+            <!-- adding vendor part number -->
+            <xpath expr="//field[@name='product_code']" position="attributes">
+            <attribute name="string">Vendor Part Number</attribute>
+            </xpath>
+    </field>
+  </record>
+</odoo>

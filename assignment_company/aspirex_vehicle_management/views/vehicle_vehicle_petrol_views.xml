@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="vehicle_vehicle_view_action" model="ir.actions.act_window">
+        <field name="name">Vehicle Information</field>
+        <field name="res_model">vehicle.vehicle</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="vehicle_vehicle_list_view"/>
+        <field name="context">{'search_default_filter_petrol': 1, 'display_complete': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Vehicle Information
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_vehicle_vehicle_petrol" name='Petrol Vehicles' sequence="2" parent="menu_configuration"
+              action="vehicle_vehicle_view_action">
+    </menuitem>
+</odoo>
