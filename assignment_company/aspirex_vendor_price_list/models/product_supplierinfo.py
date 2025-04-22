@@ -1,0 +1,9 @@
+from odoo import models, fields
+
+class SupplierInfo(models.Model):
+    _inherit = 'product.supplierinfo'
+
+    manufacturer_id = fields.Many2one( comodel_name='manufacturer.manufacturer',string='Manufacturer', help='Manufacturer of the product')
+    manufacturer_part_number = fields.Many2one( comodel_name='manufacturer.part.number',string='Manufacturer Part Number',
+                                           help='Part number provided by the manufacturer')
+

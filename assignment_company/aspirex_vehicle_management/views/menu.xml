@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="aspirex_vehicle_management_menu_root" name="VMS"
+              web_icon="aspirex_vehicle_management,static/description/icon.png">
+        <menuitem id="menu_vehicle_information" name="Vehicle Master" sequence="1"/> <!-- 1st menu -->
+        <menuitem id="menu_configuration" name="Fuel Types" sequence="10"/> <!-- 2nd menu -->
+    </menuitem>
+
+</odoo>

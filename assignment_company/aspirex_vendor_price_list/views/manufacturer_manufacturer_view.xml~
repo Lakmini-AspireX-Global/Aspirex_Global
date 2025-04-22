@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="manufacturer_manufacturer_list_view" model="ir.ui.view">
+        <field name="name">manufacturer.manufacturer.list</field>
+        <field name="model">manufacturer.manufacturer</field>
+        <field name="arch" type="xml">
+            <list string="manufacturer" limit="25" >
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+     <!-- Form view -->
+    <record id="manufacturer_manufacturer_form_view" model="ir.ui.view">
+        <field name="name">manufacturer_manufacturer.form</field>
+        <field name="model">manufacturer_manufacturer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="manufacturer_manufacturer_action" model="ir.actions.act_window">
+        <field name="name">Manufacturer </field>
+        <field name="res_model">manufacturer.manufacturer</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="manufacturer_manufacturer_list_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manufacturer
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_manufacturer_manufacturer" name='Manufacturer' sequence="15" parent="purchase.menu_purchase_config"
+              action="manufacturer_manufacturer_action" groups="base.group_system" >
+    </menuitem>
+</odoo>

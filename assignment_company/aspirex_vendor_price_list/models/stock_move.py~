@@ -1,0 +1,28 @@
+from odoo import api, fields, models, _
+
+
+class StockMove(models.Model):
+    _inherit = 'stock.move'
+
+    item = fields.Integer(string='Item No', readonly=True)
+    manufacturer_id = fields.Many2one(comodel_name='manufacturer.manufacturer', string='Manufacturer',
+                                      help='Manufacturer of the product')
+    manufacturer_part_number = fields.Many2one(comodel_name='manufacturer.part.number',
+                                               string='Manufacturer Part Number',
+                                               help='Part number provided by the manufacturer')
+    vendor_part_number = fields.Char(string='Vendor Part Number', help='Vendor Part Number')
+    vendor_part_name = fields.Char(string='Vendor Part Name', help='Vendor Part Name')
+
+    @api.model_create_multi  # multiple records
+    def create(self, value_list):  # value_list -> fields values
+        for vals in value_list:
+            if 'purchase_line_id' in vals:
+                order_line = self.env['purchase.order.line'].search([('id', '=', int(vals['purchase_line_id']))])
+                vals['manufacturer_id'] = order_line.manufacturer_id.id
+                vals['manufacturer_part_number'] = order_line.manufacturer_part_number.id
+                vals['vendor_part_number'] = order_line.vendor_part_number
+                vals['vendor_part_name'] = order_line.vendor_part_name
+            res = super(StockMove, self).create(value_list)
+            test = 1
+            return res
+

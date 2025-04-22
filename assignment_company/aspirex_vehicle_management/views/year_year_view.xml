@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List view -->
+    <record id="year_list_view" model="ir.ui.view">
+        <field name="name">year.year.list</field>
+        <field name="model">year.year</field>
+        <field name="arch" type="xml">
+            <list string="Year Information" limit="25" editable="top" create="1" multi_edit="1" open_form_view="True">
+                <field name="name"/>
+                <field name="short_code" optional="hide"/>
+                <field name="priority" widget="priority"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="year_form_view" model="ir.ui.view">
+        <field name="name">year.year.form</field>
+        <field name="model">year.year</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1 class="d-flex">
+                    <field name="priority" widget="priority"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="short_code"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- action -->
+    <record id="year_view_action" model="ir.actions.act_window">
+        <field name="name"> Owner Information</field>
+        <field name="res_model">year.year</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="year_list_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Year Information
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_year" name='Owner' sequence="3" parent="menu_configuration"
+              action="year_view_action">
+    </menuitem>
+</odoo>

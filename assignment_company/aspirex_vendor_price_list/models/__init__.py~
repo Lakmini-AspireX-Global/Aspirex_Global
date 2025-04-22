@@ -1,0 +1,5 @@
+from . import product_supplierinfo
+from . import manufacturer_manufacturer
+from . import manufacturer_part_number
+from . import purchase_order_line
+from . import stock_picking

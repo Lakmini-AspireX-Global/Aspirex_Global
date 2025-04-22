@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+manufacturer_manufacturer_user_access,manufacturer_manufacturer.user.access,model_manufacturer_manufacturer,base.group_user,1,1,1,1
+manufacturer_part_number_user_access,manufacturer_part_number.user.access,model_manufacturer_part_number,base.group_user,1,1,1,1
+stock_move.user.access,stock_move.user.access,model_stock_move,base.group_user,1,1,1,1

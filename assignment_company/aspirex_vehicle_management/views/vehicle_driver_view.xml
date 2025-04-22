@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List view -->
+    <record id="vehicle_driver_list_view" model="ir.ui.view">
+        <field name="name">vehicle.driver.list</field>
+        <field name="model">vehicle.driver</field>
+        <field name="arch" type="xml">
+            <list string="Vehicle Information" limit="25">
+                <field name="name"/>
+                <field name="age" optional="hide"/>
+                <field name="mobile"/>
+                <field name="email"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="vehicle_driver_form_view" model="ir.ui.view">
+        <field name="name">vehicle.driver.form</field>
+        <field name="model">vehicle.driver</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="age" optional="hide"/>
+                            <field name="mobile"/>
+                            <field name="email"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="vehicle_driver_view_action" model="ir.actions.act_window">
+        <field name="name">Driver Information</field>
+        <field name="res_model">vehicle.driver</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="vehicle_driver_list_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Vehicle Information
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_vehicle_driver" name="Drivers" sequence="5" parent="menu_configuration"
+              action="vehicle_driver_view_action"/>
+</odoo>

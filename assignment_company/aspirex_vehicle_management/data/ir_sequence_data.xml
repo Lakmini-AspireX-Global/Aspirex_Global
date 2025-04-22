@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- ir.sequence model -->
+    <data noupdate="1">
+    <record id="seq_vehicle" model="ir.sequence">
+        <field name="name">Vehicle Sequence</field>
+        <field name="code">vehicle.sequence</field>
+        <field name="prefix">VEH/</field>
+        <field name="padding">5</field>
+        <!-- number_increment -->
+        <field name="company_id" eval="False"/>
+    </record>
+    </data>
+</odoo>
